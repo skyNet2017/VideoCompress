@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -163,7 +164,7 @@ private void openFile(File file) {
             intent.setAction(Intent.ACTION_VIEW);
             if (Build.VERSION.SDK_INT>=24){
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                Uri contentUri=FileProvider.getUriForFile(this,"com.babyinhand.fileprovider",file);
+                Uri contentUri= FileProvider.getUriForFile(this,"com.babyinhand.fileprovider",file);
                 String type = getMIMEType(file);
                 intent.setDataAndType(contentUri,type);
             }else {
@@ -176,7 +177,7 @@ private void openFile(File file) {
             //跳转
             startActivity(intent);
         } catch (Exception e) {
-            Toast.makeText(ActivityLocalVideoActivity.this, "不能打开视频文件", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "不能打开视频文件", Toast.LENGTH_SHORT).show();
         }
 
     }
